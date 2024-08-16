@@ -47,28 +47,31 @@ struct ContentView: View {
                     .pickerStyle(.navigationLink)
                 }
 
-                Section("How much do you want to tip?") {
-                    Picker("Percent", selection: $tipPercentage) {
-                        ForEach(0..<101) {
-                            Text("\($0)%")
-                        }
-                    }
-                }
 //                Section("How much do you want to tip?") {
-//                    Picker("Tip Percentage", selection: $tipPercentage) {
-//                        ForEach(tipPercentages, id: \.self) {
-//                            Text($0, format: .percent)
+//                    Picker("Percent", selection: $tipPercentage) {
+//                        ForEach(0..<101) {
+//                            Text("\($0)%")
 //                        }
 //                    }
-//                    .pickerStyle(.segmented)
 //                }
+                
+                Section("How much do you want to tip?") {
+                    Picker("Tip Percentage", selection: $tipPercentage) {
+                        ForEach(tipPercentages, id: \.self) {
+                            Text($0, format: .percent)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
 
                 Section("Check Amount:") {
                     Text("\(checkTotal)")
+                        .foregroundColor((tipPercentage == 0) ? .red : .black)
                 }
 
                 Section("Amount per Person") {
                     Text("\(totalPerPerson)")
+                        .foregroundColor((tipPercentage == 0) ? .red : .black)
                 }
             }
             .navigationTitle("WeSplit")
